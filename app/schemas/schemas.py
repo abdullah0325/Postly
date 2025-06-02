@@ -82,3 +82,32 @@ class LikeOut(BaseModel):
 
     class Config:
         orm_mode = True
+
+
+from pydantic import BaseModel
+from datetime import datetime
+
+class MessageCreate(BaseModel):
+    receiver_id: int
+    content: str
+
+class MessageOut(BaseModel):
+    id: int
+    content: str
+    sender_id: int
+    receiver_id: int
+    timestamp: datetime
+    is_read: bool
+
+    class Config:
+        orm_mode = True
+
+
+class UserOut(BaseModel):
+    id: int
+    username: str
+    email: str
+    created_at: datetime
+
+    class Config:
+        orm_mode = True

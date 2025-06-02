@@ -68,3 +68,17 @@ class Like(Base):
 
     def __repr__(self):
         return f"<Like(id={self.id}, user_id={self.user_id}, post_id={self.post_id})>"
+
+
+class Message(Base):
+    __tablename__ = "messages"
+
+    id = Column(Integer, primary_key=True, index=True)
+    content = Column(Text, nullable=False)
+    sender_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
+    receiver_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
+    timestamp = Column(DateTime(timezone=True), server_default=func.now())
+    is_read = Column(Integer, default=0)
+
+    sender = relationship("User", foreign_keys=[sender_id], backref="sent_messages")
+    receiver = relationship("User", foreign_keys=[receiver_id], backref="received_messages")
