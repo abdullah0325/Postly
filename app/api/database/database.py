@@ -3,7 +3,7 @@
 # from sqlalchemy.orm import Session
 # from contextlib import contextmanager
 
-# DATABASE_URL = "postgresql://Postgres_sql_owner:z31bWYweGVFd@ep-white-tree-a7pollpn-pooler.ap-southeast-2.aws.neon.tech/Postgres_sql?sslmode=require"
+# DATABASE_URL = ""
 
 # engine = create_engine(DATABASE_URL)
 # SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
@@ -20,8 +20,12 @@
 
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
+import os 
+from dotenv import load_dotenv
+load_dotenv()
 
-DATABASE_URL = "postgresql://Postgres_sql_owner:z31bWYweGVFd@ep-white-tree-a7pollpn-pooler.ap-southeast-2.aws.neon.tech/Postgres_sql?sslmode=require"
+
+DATABASE_URL = os.getenv("DATABASE_URL")
 
 engine = create_engine(
     DATABASE_URL,
